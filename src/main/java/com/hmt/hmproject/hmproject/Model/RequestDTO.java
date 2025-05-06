@@ -9,11 +9,11 @@ import org.apache.http.NameValuePair;
 import java.util.List;
 import java.util.Map;
 
-@Getter                // Automatically generates getters for all fields
-@Setter                // Automatically generates setters for all fields
-@NoArgsConstructor     // Automatically generates a no-argument constructor
-@AllArgsConstructor    // Automatically generates a constructor with all fields
-@ToString              // Automatically generates a toString() method
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 public class RequestDTO {
     private ApiMethod apiMethod;
     private String url;
