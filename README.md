@@ -1,6 +1,67 @@
 # Project-For_Non-Blocking_HTTP_Invocation_API
 Building an internal orchestration API for a platform that handles high volumes of incoming HTTP traffic (e.g., 1000+ concurrent requests). Each incoming request triggers a downstream HTTP call to external services.
 
+---
+
+## 🚀 How to Run
+
+### 1. Clone and Build the Project
+
+```bash
+git clone <your-repo-url>
+cd HMProject
+./mvnw clean install
+```
+
+### 2. Start the Spring Boot App
+
+```bash
+./mvnw spring-boot:run
+```
+
+The app will run on port `8080` by default.
+
+### 3. Available Endpoints
+
+* **Sync**: `http://localhost:8080/invoke`
+* **Async**: `http://localhost:8080/invokeasync`
+
+### 4. Sample Request Payload
+
+```json
+{
+  "apiMethod": "POST",
+  "requestDTO": {
+    "url": "https://httpbin.org/post",
+    "queryParams": {
+      "q": "test"
+    },
+    "headerVariables": {
+      "Authorization": "Bearer your-token",
+      "Content-Type": "application/json"
+    },
+    "bodyType": "json",
+    "requestBody": "{\"key\":\"value\"}",
+    "pathMap": {},
+    "formParam": null,
+    "urlEncodedParam": null,
+    "params": null
+  },
+  "timeout": 5000
+}
+```
+
+### 5. Load Testing
+
+Install [k6](https://k6.io/) and run the test scripts:
+
+```bash
+k6 run test/load-tests/k6-load-test-sync.js
+k6 run test/load-tests/k6-load-test-async.js
+```
+
+---
+
 # Project Structure and Architecture
 
 ```
@@ -144,66 +205,6 @@ k6 run k6-load-test-sync.js
     * Major performance bottlenecks under load.
     * Much slower response time and iteration time.
 
----
-
-## 🚀 How to Run
-
-### 1. Clone and Build the Project
-
-```bash
-git clone <your-repo-url>
-cd HMProject
-./mvnw clean install
-```
-
-### 2. Start the Spring Boot App
-
-```bash
-./mvnw spring-boot:run
-```
-
-The app will run on port `8080` by default.
-
-### 3. Available Endpoints
-
-* **Sync**: `http://localhost:8080/invoke`
-* **Async**: `http://localhost:8080/invokeasync`
-
-### 4. Sample Request Payload
-
-```json
-{
-  "apiMethod": "POST",
-  "requestDTO": {
-    "url": "https://httpbin.org/post",
-    "queryParams": {
-      "q": "test"
-    },
-    "headerVariables": {
-      "Authorization": "Bearer your-token",
-      "Content-Type": "application/json"
-    },
-    "bodyType": "json",
-    "requestBody": "{\"key\":\"value\"}",
-    "pathMap": {},
-    "formParam": null,
-    "urlEncodedParam": null,
-    "params": null
-  },
-  "timeout": 5000
-}
-```
-
-### 5. Load Testing
-
-Install [k6](https://k6.io/) and run the test scripts:
-
-```bash
-k6 run test/load-tests/k6-load-test-sync.js
-k6 run test/load-tests/k6-load-test-async.js
-```
-
----
 
 ## 🏁 Conclusion
 
