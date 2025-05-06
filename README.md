@@ -64,6 +64,13 @@ k6 run test/load-tests/k6-load-test-async.js
 
 # Project Structure and Architecture
 
+Implemented each of invoke* methods using WebClient in a non-blocking fashion, 
+while preserving original signature of accepting an SSLConnectionSocketFactory 
+and a per-request timeout, Used SslConfig to configure the SSLConnectionSocketFactory() method bean
+where it will intialize the SSLConnectionSocketFactory with dummy Trusted Host and Trusted Certificate.
+
+
+
 ```
 src/
 ├── main/
